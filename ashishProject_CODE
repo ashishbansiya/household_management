@@ -1,0 +1,655 @@
+
+import javax.swing.*;
+import java.awt.Font;
+import java.awt.event.*;
+import java.io.*;
+import java.io.IOException;
+import java.applet.*;
+import java.util.*;
+
+
+class ashishProject implements ActionListener
+{
+    
+    JFrame f;
+    JLabel wel,l1,l2,l3,l4,l5,l6,l7,l8,l9,l10,l11,l12,l13,l14,l15,l16,m0,sum,no     , n,mob,em,m,p,  name,pass,m1     , year;
+    JButton reg,sign,delrec,s, si  , save;
+    JTextField tf1,tf2,tf3,tf4,tf5,tf6,tf7,tf8,tf9,tf10,tf11,tf12,tf13,tf14,tf15 ,  n_t,mob_t,em_t,p_t  , name_t,pass_t;
+    
+    JComboBox y;
+    
+    
+       
+    
+
+    
+    ashishProject() 
+    {
+        f=new JFrame("ashish Account");
+        
+        
+        reg=new JButton("Register");
+        sign=new JButton("Sign In");
+        wel=new JLabel("Welcome");
+        delrec=new JButton("Delete User");
+        
+        reg.addActionListener(this);
+        sign.addActionListener(this);
+        delrec.addActionListener(this);
+        
+        reg.setBounds(220,400,100,50);
+        sign.setBounds(340,400,100,50);
+        wel.setBounds(270,100,400,400);
+        delrec.setBounds(460,400,100,50);
+        wel.setFont(new Font("ARABIAN",Font.BOLD,60));
+        
+        
+        f.add(reg);
+        f.add(sign);
+        f.add(wel);
+        f.add(delrec);
+        
+        f.setLayout(null);
+        f.setVisible(true);
+        f.setSize(800,800);
+        f.setResizable(false);
+        
+    }    
+    public void actionPerformed(ActionEvent e0)
+    {
+        
+        if(e0.getSource()==reg)
+        {
+            reg r=new reg();
+            r.setVisible(true);
+            
+            
+            
+            n=new JLabel("Name");
+            mob=new JLabel("Phone Number");
+            em=new JLabel("Email");
+            p=new JLabel("Password");
+            m=new JLabel("");
+            
+            
+            n_t=new JTextField();
+            mob_t=new JTextField();
+            em_t=new JTextField();
+            p_t=new JTextField();
+            
+            
+
+            
+            
+            
+            s=new JButton("SUBMIT");
+            
+            
+            n.setBounds(120,20,100,100);
+            mob.setBounds(120,60,100,100);
+            em.setBounds(120,100,100,100);
+            p.setBounds(120,140,100,100);
+            
+            
+            n_t.setBounds(400,60,150,20);
+            mob_t.setBounds(400,100,150,20);
+            em_t.setBounds(400,140,150,20);
+            p_t.setBounds(400,180,150,20);
+            
+            s.setBounds(250,300,100,20);
+            
+            
+            r.add(n);
+            r.add(mob);
+            r.add(em);
+            r.add(p);
+           
+            
+            r.add(n_t);
+            r.add(mob_t);
+            r.add(em_t);
+            r.add(p_t);
+            
+            r.add(s);
+            r.add(m);
+ 
+            
+            s.addActionListener(new ActionListener()
+            { 
+                public void actionPerformed(ActionEvent e1)
+                {
+                    if(e1.getSource()==s)
+                    {  
+                        try
+                        {
+                            JOptionPane.showMessageDialog(null,"User Added Successfully");
+                            PrintWriter p=new PrintWriter(new BufferedWriter(new FileWriter("ashishProfile.txt",true)));
+                            p.println(n_t.getText());
+                            p.println(p_t.getText());
+                            p.close();
+                        }
+                        catch(IOException e)
+                        {
+                            
+                        }
+                          
+                    }
+                    
+                    
+                    
+                }
+            });
+            
+        }
+        
+        else if(e0.getSource()==sign)
+        {
+            signin s=new signin();
+            s.setVisible(true);
+            
+          
+            name=new JLabel("Username");
+            pass=new JLabel("Password");
+            m1=new JLabel("");
+            
+            name_t=new JTextField();
+            pass_t=new JTextField();
+            
+           
+            
+            si=new JButton("Sign In");
+            
+            name.setBounds(250,200,150,50);
+            pass.setBounds(250,240,150,50);
+            
+            name_t.setBounds(350,218,150,20);
+            pass_t.setBounds(350,255,150,20);
+            
+            si.setBounds(300,400,150,50);
+            
+            s.add(name);
+            s.add(pass);
+            s.add(name_t);
+            s.add(pass_t);
+            s.add(si);
+            s.add(m1);
+            
+            
+                       
+            
+            si.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e2)
+                {
+                    if (e2.getSource()==si)
+                    {
+                        try
+                        {
+                            BufferedReader file1=new BufferedReader(new FileReader("ashishProfile.txt"));
+                            String name,n,password;
+                            while( (name=file1.readLine()) != null)
+                            {
+                                n=name;
+                                password=file1.readLine();
+                                
+                            
+                            
+                            
+                            if((name_t.getText()).equals(n) && (pass_t.getText()).equals(password))
+                            {
+                                JOptionPane.showMessageDialog(null,"Logging In");
+                                
+                                user user1=new user();
+                                user1.setTitle(n);                              
+                                user1.setVisible(true);
+                                
+                                m0=new JLabel("");
+                                
+                                JButton sp=new JButton("See Previous Data");
+                                JButton ad=new JButton("Add Data");
+                                JButton dlr=new JButton("Delete Records");
+                                
+                                sp.setBounds(160,300,150,50);
+                                ad.setBounds(320,300,150,50);
+                                dlr.setBounds(480,300,150,50);
+                                
+                                user1.add(ad);
+                                user1.add(sp);
+                                user1.add(dlr);
+                        
+                                user1.add(m0);
+                                
+                                
+                                ad.addActionListener(new ActionListener()
+                                {
+                                    public void actionPerformed(ActionEvent e3)
+                                    {
+                                        if(e3.getSource()==ad)
+                                        {
+                                            sdata a=new sdata();
+                                            a.setTitle("Adding Data");
+                                            a.setVisible(true);
+                                            JButton save=new JButton("Save");
+                                            
+                                            l1=new JLabel("Month Name");
+                                            l2=new JLabel("Starting Date Of Month");
+                                            l3=new JLabel("End Date of Month");
+                                            l4=new JLabel("EMI");
+                                            l5=new JLabel("TAX");
+                                            l6=new JLabel("Travelling");
+                                            l7=new JLabel("Insurance Premium");
+                                            l8=new JLabel("Electricity Bill");
+                                            l9=new JLabel("School Fees");
+                                            l10=new JLabel("Food");
+                                            l11=new JLabel("Shopping");
+                                            l12=new JLabel("Health");
+                                            l13=new JLabel("Other Expenses");
+                                            l14=new JLabel("Total Income");                                                                                       
+                                            
+                                            
+                                            m0=new JLabel("");
+                                            
+                                            
+                                            
+                                            tf1=new JTextField();
+                                            tf2=new JTextField();
+                                            tf3=new JTextField();
+                                            tf4=new JTextField();
+                                            tf5=new JTextField();
+                                            tf6=new JTextField();
+                                            tf7=new JTextField();
+                                            tf8=new JTextField();
+                                            tf9=new JTextField();
+                                            tf10=new JTextField();
+                                            tf11=new JTextField();
+                                            tf12=new JTextField();
+                                            tf13=new JTextField();
+                                            tf14=new JTextField();
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            l1.setBounds(40,40,300,50);
+                                            l2.setBounds(40,80,300,50);
+                                            l3.setBounds(40,120,300,50);
+                                            l4.setBounds(40,160,300,50);
+                                            l5.setBounds(40,200,300,50);
+                                            l6.setBounds(40,240,300,50);
+                                            l7.setBounds(40,280,300,50);
+                                            l8.setBounds(40,320,300,50);
+                                            l9.setBounds(40,360,300,50);
+                                            l10.setBounds(40,400,300,50);
+                                            l11.setBounds(40,440,300,50);
+                                            l12.setBounds(40,480,300,50);
+                                            l13.setBounds(40,520,300,50);
+                                            l14.setBounds(40,560,300,50);
+                                            
+                                            
+                                            
+                                            tf1.setBounds(400,55,150,25);
+                                            tf2.setBounds(400,95,150,25);
+                                            tf3.setBounds(400,135,150,25);
+                                            tf4.setBounds(400,175,150,25);
+                                            tf5.setBounds(400,215,150,25);
+                                            tf6.setBounds(400,255,150,25);
+                                            tf7.setBounds(400,295,150,25);
+                                            tf8.setBounds(400,335,150,25);
+                                            tf9.setBounds(400,375,150,25);
+                                            tf10.setBounds(400,415,150,25);
+                                            tf11.setBounds(400,455,150,25);
+                                            tf12.setBounds(400,495,150,25);
+                                            tf13.setBounds(400,535,150,25);
+                                            tf14.setBounds(400,575,150,25);
+                                            
+                                            
+                                            save.setBounds(300,665,150,50);
+                                            
+                                            a.add(l1);
+                                            a.add(l2);
+                                            a.add(l3);
+                                            a.add(l4);
+                                            a.add(l5);
+                                            a.add(l6);
+                                            a.add(l7);
+                                            a.add(l8);
+                                            a.add(l9);
+                                            a.add(l10);
+                                            a.add(l11);
+                                            a.add(l12);
+                                            a.add(l13);
+                                            a.add(l14);
+                                            
+                                            
+                                            
+                                            a.add(tf1);
+                                            a.add(tf2);
+                                            a.add(tf3);
+                                            a.add(tf4);
+                                            a.add(tf5);
+                                            a.add(tf6);
+                                            a.add(tf7);
+                                            a.add(tf8);
+                                            a.add(tf9);
+                                            a.add(tf10);
+                                            a.add(tf11);
+                                            a.add(tf12);
+                                            a.add(tf13);
+                                            a.add(tf14);
+                                           
+                                            
+                                            a.add(save);
+                                            a.add(m0);
+                                            
+                                            
+                                                        
+                                            
+                                            save.addActionListener(new ActionListener()
+                                            {
+                                                public void actionPerformed(ActionEvent e4)
+                                                {
+                                                    try
+                                                    {        
+                                                        
+                                                        JOptionPane.showMessageDialog(null,"Record Added");
+                                                        PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("ashish.txt",true)));
+                                                        pw.println(tf1.getText());
+                                                        pw.println(tf2.getText());
+                                                        pw.println(tf3.getText());
+                                                        pw.println(tf4.getText());
+                                                        pw.println(tf5.getText());
+                                                        pw.println(tf6.getText());
+                                                        pw.println(tf7.getText());
+                                                        pw.println(tf8.getText());
+                                                        pw.println(tf9.getText());
+                                                        pw.println(tf10.getText());
+                                                        pw.println(tf11.getText());
+                                                        pw.println(tf12.getText());
+                                                        pw.println(tf13.getText());
+                                                        pw.println(tf14.getText());
+                                                        
+                                                        
+                                                        
+                                                        pw.close();                                                        
+                                                        
+                                                    }
+                                                    catch(IOException  e)
+                                                    {
+                                                        
+                                                    }
+                                                }
+                                            });
+                                            
+                                        }
+                                    }
+                                });
+                            
+                                
+                                
+                                
+                                
+                                sp.addActionListener(new ActionListener()
+                                {
+                                    public void actionPerformed(ActionEvent e)
+                                    {
+                                        try
+                                        {
+                                            
+                                            
+                                            BufferedReader file = new BufferedReader(new
+                                            FileReader("ashish.txt"));
+                                            String name;
+                                            int i=1;
+                                            
+                                            JOptionPane.showMessageDialog(null,"Showing Records");
+                                            
+                                            while((name = file.readLine()) != null)
+                                            {
+                                            
+                                                JFrame f3=new JFrame();
+                                                JLabel f1,f2,fw3,f4,f5,f6,f7,f8,f9,f10,f11,f12,f13,f14,f15;
+                                                f3.setTitle("Previous Records");
+                                                f3.setSize(800,800);
+                                                f3.setVisible(true);
+                                               
+                                                  
+                                                    l1=new JLabel("Month Name");
+                                                    l2=new JLabel("Starting Date Of Month");
+                                                    l3=new JLabel("End Date of Month");
+                                                    l4=new JLabel("EMI");
+                                                    l5=new JLabel("TAX");
+                                                    l6=new JLabel("Travelling");
+                                                    l7=new JLabel("Insurance Premium");
+                                                    l8=new JLabel("Electricity Bill");
+                                                    l9=new JLabel("School Fees");
+                                                    l10=new JLabel("Food");
+                                                    l11=new JLabel("Shopping");
+                                                    l12=new JLabel("Health");
+                                                    l13=new JLabel("Other Expenses");
+                                                    l14=new JLabel("Total Income");
+                                                    l15=new JLabel("Net Income ");
+                                                    m0=new JLabel("");
+                                                    sum=new JLabel("Record");
+                                                    no=new JLabel(String.valueOf(i));
+                                                    
+                                                    
+                                                    
+                                                    f1=new JLabel(name);
+                                                    f2=new JLabel(file.readLine());
+                                                    fw3=new JLabel(file.readLine());
+                                                    f4=new JLabel(file.readLine());
+                                                    f5=new JLabel(file.readLine());
+                                                    f6=new JLabel(file.readLine());                   
+                                                    f7=new JLabel(file.readLine());                   
+                                                    f8=new JLabel(file.readLine());                   
+                                                    f9=new JLabel(file.readLine());                   
+                                                    f10=new JLabel(file.readLine());
+                                                    f11=new JLabel(file.readLine());
+                                                    f12=new JLabel(file.readLine());
+                                                    f13=new JLabel(file.readLine());
+                                                    f14=new JLabel(file.readLine());
+                                                    
+                                                    int kk=Integer.parseInt(f4.getText());
+                                                    int ii=Integer.parseInt(f5.getText());
+                                                    int aa=Integer.parseInt(f6.getText());
+                                                    int bb=Integer.parseInt(f7.getText());
+                                                    int cc=Integer.parseInt(f8.getText());
+                                                    int dd=Integer.parseInt(f9.getText());
+                                                    int ee=Integer.parseInt(f10.getText());
+                                                    int ff=Integer.parseInt(f11.getText());
+                                                    int gg=Integer.parseInt(f12.getText());
+                                                    int hh=Integer.parseInt(f13.getText());
+                                                    int jj=Integer.parseInt(f14.getText());
+                                                    
+                                                    int tot=jj-(aa+bb+cc+dd+ee+ff+gg+hh+ii+kk);
+                                                    f15=new JLabel();
+                                                    f15.setText(String.valueOf(tot));
+                                                    
+                                                    
+                                                    
+                                                    l1.setBounds(40,40,700,40);
+                                                    l2.setBounds(40,80,700,40);
+                                                    l3.setBounds(40,120,700,40);
+                                                    l4.setBounds(40,160,700,40);
+                                                    l5.setBounds(40,200,700,40);
+                                                    l6.setBounds(40,240,700,40);
+                                                    l7.setBounds(40,280,700,40);
+                                                    l8.setBounds(40,320,700,40);
+                                                    l9.setBounds(40,360,700,40);
+                                                    l10.setBounds(40,400,700,40);
+                                                    l11.setBounds(40,440,700,40);
+                                                    l12.setBounds(40,480,700,40);
+                                                    l13.setBounds(40,520,700,40);
+                                                    l14.setBounds(40,560,700,40);
+                                                    l15.setBounds(40,600,700,40);
+                                                    sum.setBounds(10,10,50,20);
+                                                    no.setBounds(60,10,20,20);
+                                                    
+                                                    f1.setBounds(400,50,150,25);
+                                                    f2.setBounds(400,90,150,25);
+                                                    fw3.setBounds(400,130,150,25);
+                                                    f4.setBounds(400,170,150,25);
+                                                    f5.setBounds(400,210,150,25);
+                                                    f6.setBounds(400,250,150,25);
+                                                    f7.setBounds(400,290,150,25);
+                                                    f8.setBounds(400,330,150,25);
+                                                    f9.setBounds(400,370,150,25);
+                                                    f10.setBounds(400,410,150,25);
+                                                    f11.setBounds(400,450,150,25);
+                                                    f12.setBounds(400,490,150,25);
+                                                    f13.setBounds(400,530,150,25);
+                                                    f14.setBounds(400,570,150,25);
+                                                    f15.setBounds(400,610,150,25);
+                                                    
+                                                    
+                                                    f3.add(l1);
+                                                    f3.add(l2);
+                                                    f3.add(l3);
+                                                    f3.add(l4);
+                                                    f3.add(l5);
+                                                    f3.add(l6);
+                                                    f3.add(l7);
+                                                    f3.add(l8);
+                                                    f3.add(l9);
+                                                    f3.add(l10);
+                                                    f3.add(l11);
+                                                    f3.add(l12);
+                                                    f3.add(l13);
+                                                    f3.add(l14);
+                                                    f3.add(l15);
+                                                    f3.add(sum);
+                                                    f3.add(no);
+                                                    
+                                                    f3.add(f1);
+                                                    f3.add(f2);
+                                                    f3.add(fw3);
+                                                    f3.add(f4);
+                                                    f3.add(f5);
+                                                    f3.add(f6);
+                                                    f3.add(f7);
+                                                    f3.add(f8);
+                                                    f3.add(f9);
+                                                    f3.add(f10);
+                                                    f3.add(f11);
+                                                    f3.add(f12);
+                                                    f3.add(f13);
+                                                    f3.add(f14);
+                                                    f3.add(f15);
+                                                    f3.add(m0);
+                                                    
+                                                    
+                                                    i++;
+                                                    
+                                                
+                                                
+                                            }
+                                            file.close();
+                                        }
+                                        catch(IOException e1)
+                                        {
+                                            
+                                        }
+                                    }
+                                });
+                                
+                                dlr.addActionListener(new ActionListener()
+                                {
+                                    public void actionPerformed(ActionEvent ez)
+                                    {
+                                                try
+                                                {
+                                                    PrintWriter p=new PrintWriter(new BufferedWriter(new FileWriter("ashish.txt")));
+                                                    p.close();
+                                                    JOptionPane.showMessageDialog(null,"Records Deleted Successfully");
+                                                }
+                                                catch(IOException e10)
+                                                {
+
+                                                }
+                                    }
+                                });
+                                
+                                
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null,"User not Found");
+                            }
+                            file1.close();
+                        }
+                        }
+                        catch(Exception ae)
+                        {
+                            
+                        }
+                    }
+                }
+            });
+        }
+        else if(e0.getSource()==delrec)
+        {
+            try
+            {
+                PrintWriter p=new PrintWriter(new BufferedWriter(new FileWriter("ashishProfile.txt")));
+                p.close();
+                JOptionPane.showMessageDialog(null,"User Deleted Successfully");
+            }
+            catch(IOException e10)
+            {
+                
+            }
+        }
+        
+
+    }
+    
+    public static void main(String [] args)throws IOException
+    {
+        
+        
+        new ashishProject();
+            
+        
+        
+    }
+}
+class signin extends JFrame 
+{
+    signin()
+    {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Sign In");
+        setSize(800,800);       
+    }
+}
+
+class reg extends JFrame 
+{
+    reg()
+    {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Register");
+        setSize(800,800);       
+    }
+}
+class user extends JFrame
+{
+    user()
+    {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);        
+        setSize(800,800);
+    }
+    
+}
+class sdata extends JFrame
+{
+    sdata()
+    {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(800,800);
+    }
+}
